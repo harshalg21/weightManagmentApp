@@ -1,0 +1,10 @@
+# Cloned awesome-skills repo (has its own .git)
+.agents/awesome-skills/
+
+# Local database & temp files
+.codelens/codelens-graph.db
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store

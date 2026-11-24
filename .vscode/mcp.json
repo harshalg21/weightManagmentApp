@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "codelens": {
+      "command": "node",
+      "args": [
+        "C:/Users/harshal/.codelens/mcp.js",
+        "--auto"
+      ]
+    }
+  }
+}

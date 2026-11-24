@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial Quotation & Proposal Brochure — Weight Management App</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    :root {
+      --primary: #0f766e;
+      --primary-dark: #115e59;
+      --primary-light: #f0fdfa;
+      --accent: #4f46e5;
+      --gold: #d97706;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --card: #ffffff;
+      --surface: #f8fafc;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text);
+      background: #f1f5f9;
+      line-height: 1.5;
+      padding: 40px 20px;
+    }
+
+    .brochure-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+      padding: 50px;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 28px;
+    }
+
+    .brand-area h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-area p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .doc-badge {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .meta-details {
+      text-align: right;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Executive Callout */
+    .summary-box {
+      background: linear-gradient(135deg, #f0fdfa, #f8fafc);
+      border: 1px solid #99f6e4;
+      border-radius: 14px;
+      padding: 18px 22px;
+      margin-bottom: 28px;
+    }
+
+    .summary-box h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+    }
+
+    .summary-box p {
+      font-size: 12.5px;
+      color: #134e4a;
+    }
+
+    /* Headings */
+    .sec-heading {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+      margin: 28px 0 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sec-heading::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: var(--primary);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    /* Tables */
+    .table-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+      text-align: left;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #334155;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: #475569;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background-color: #fafbfc; }
+
+    .highlight-row td {
+      background-color: #f0fdfa !important;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .strike-price {
+      text-decoration: line-through;
+      color: #94a3b8;
+      font-size: 11px;
+      margin-right: 6px;
+    }
+
+    .tag-v1 {
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+    }
+
+    .tag-v2 {
+      background: #e0e7ff;
+      color: #4338ca;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+    }
+
+    .tag-v3 {
+      background: #fef3c7;
+      color: #b45309;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+    }
+
+    /* Prototype Button Banner */
+    .prototype-cta {
+      background: #0f172a;
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 28px 0;
+    }
+
+    .prototype-cta h4 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .prototype-cta p {
+      font-size: 11.5px;
+      color: #94a3b8;
+    }
+
+    .btn-link {
+      background: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Signatures */
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 2px solid var(--border);
+    }
+
+    .sig-col .role-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .sig-line {
+      border-bottom: 1px solid #94a3b8;
+      margin-bottom: 8px;
+    }
+
+    .sig-col .name {
+      font-size: 13.5px;
+      font-weight: 800;
+    }
+
+    .sig-col .title {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .brochure-container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="brochure-container">
+    
+    <!-- Header -->
+    <div class="header">
+      <div class="brand-area">
+        <h1>📱 Weight Management App Proposal</h1>
+        <p>Standalone Consumer Health-Tech Application (iOS & Android) with Doctor Clinical Portal</p>
+      </div>
+      <div class="meta-details">
+        <span class="doc-badge">Preferred Client Quotation</span>
+        <p><strong>Ref:</strong> MGC-APP-2026-Q1</p>
+        <p><strong>Date:</strong> November 2026</p>
+        <p><strong>Client:</strong> Dr. Jitendra Mistry</p>
+      </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="summary-box">
+      <h3>Executive Overview & Product Architecture</h3>
+      <p>
+        A standalone B2C mobile application designed for anyone across India and globally to download from the Apple App Store and Google Play Store. It features complete gamified consistency tracking, calorie/workout logging, and an AI performance summarizer, while providing Dr. Mistry and his clinical staff with a dedicated web portal to monitor patient progress and publish medical knowledge base content.
+      </p>
+    </div>
+
+    <!-- Section 1: Pricing & Quotation -->
+    <div class="sec-heading">1. Commercial Quotation & Platform Investment (Preferred Client Pricing)</div>
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Development Model</th>
+            <th>Platforms & Technology</th>
+            <th>One-Time Investment</th>
+            <th>Annual Maintenance (AMC)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td><strong>Combined Dual App (Recommended)</strong></td>
+            <td><strong>Both iOS & Android (Single Flutter/React Native Codebase)</strong></td>
+            <td>
+              <span class="strike-price">₹1,95,000</span>
+              <strong>₹1,45,000 INR</strong>
+            </td>
+            <td><strong>₹25,000 / year</strong></td>
+          </tr>
+          <tr>
+            <td>Standalone Android App Only</td>
+            <td>Google Play Store (Native Kotlin / Compose)</td>
+            <td>₹1,10,000 INR</td>
+            <td>₹20,000 / year</td>
+          </tr>
+          <tr>
+            <td>Standalone iOS App Only</td>
+            <td>Apple App Store (Native Swift / SwiftUI)</td>
+            <td>₹1,10,000 INR</td>
+            <td>₹20,000 / year</td>
+          </tr>
+          <tr>
+            <td>Both Native Apps Separately</td>
+            <td>Two Separate Native Teams (Swift + Kotlin)</td>
+            <td>₹2,10,000 INR</td>
+            <td>₹40,000 / year</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 2: 3-Stage Roadmap -->
+    <div class="sec-heading">2. Feature Scope & Version Roadmap (All Features Included in Lower Bid)</div>
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature Module</th>
+            <th>Basic Plan <span class="tag-v1">Version 1 (Pitch Now)</span></th>
+            <th>Pro Plan <span class="tag-v2">Version 2 (Upcoming)</span></th>
+            <th>Elite Plan <span class="tag-v3">Version 3 (Future Scale)</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Authentication</strong></td>
+            <td>Google, Mobile OTP, Email/Pass + Unique User ID</td>
+            <td>Biometric Face ID & Fingerprint unlock</td>
+            <td>Multi-account family & carer profiles</td>
+          </tr>
+          <tr>
+            <td><strong>Patient Profile</strong></td>
+            <td>Height (cm/ft), Weight (kg/lbs), Age, Activity Tier</td>
+            <td>Waist-to-hip ratio & body fat % tracking</td>
+            <td>Continuous smart scale Bluetooth sync</td>
+          </tr>
+          <tr>
+            <td><strong>Metabolic Targets</strong></td>
+            <td>Auto-calculates BMI, BMR, and Maintenance/Loss calories</td>
+            <td>Dynamic TDEE algorithm auto-adjusting weekly</td>
+            <td>Real-time metabolic rate via CGM sync</td>
+          </tr>
+          <tr>
+            <td><strong>Food Intake Logger</strong></td>
+            <td>Log 6 meal slots (Breakfast, Lunch, Snacks, Dinner, Pre/Post)</td>
+            <td>AI Camera Plate Scanner (Photo $\rightarrow$ auto calorie log)</td>
+            <td>Barcode & packaged grocery scanner</td>
+          </tr>
+          <tr>
+            <td><strong>Quick-Copy Meals</strong></td>
+            <td>1-tap "Repeat Yesterday's Lunch" to stop logging fatigue</td>
+            <td>Smart meal memory & automated favorites</td>
+            <td>Pre-set custom diet charts by hospital team</td>
+          </tr>
+          <tr>
+            <td><strong>Workout & Burn Log</strong></td>
+            <td>Log walk, run, gym timing $\rightarrow$ auto burn calculation</td>
+            <td>Live Apple HealthKit & Google Health Connect sync</td>
+            <td>GPS live route tracking for runs/cycles</td>
+          </tr>
+          <tr>
+            <td><strong>Gamified Streaks</strong></td>
+            <td>Wood, Bronze (1-30d), Silver (3mo), Gold (9mo) Medals</td>
+            <td>Milestone reward shop with unlockable themes</td>
+            <td>In-app clinic voucher rewards for OPD visits</td>
+          </tr>
+          <tr>
+            <td><strong>WhatsApp Sharing</strong></td>
+            <td>1-tap button to share streak medals to WhatsApp Status</td>
+            <td>Auto-generated monthly transformation photo card</td>
+            <td>Before/after milestone social poster</td>
+          </tr>
+          <tr>
+            <td><strong>Community Ranks</strong></td>
+            <td>Weekly logging consistency & streak podium leaderboard</td>
+            <td>Step count & active calorie burn leaderboards</td>
+            <td>Private hospital patient challenge pods</td>
+          </tr>
+          <tr>
+            <td><strong>Smart Reminders</strong></td>
+            <td>Evening push notifications to log meals & save streaks</td>
+            <td>Hydration water glass alert every 2 hours</td>
+            <td>AI reminder adjusting to patient sleep routine</td>
+          </tr>
+          <tr>
+            <td><strong>Doctor Web Portal</strong></td>
+            <td>Web dashboard for Dr. Mistry & staff to view patient logs</td>
+            <td>Dietitian portal to change patient calorie goals</td>
+            <td>Auto-flags high-risk patients who stopped logging</td>
+          </tr>
+          <tr>
+            <td><strong>Knowledge Base Tab</strong></td>
+            <td>In-app feed of articles, diet blogs, and videos from doctor</td>
+            <td>Category filters for Fatty Liver, Bariatric & Reflux</td>
+            <td>In-app patient Q&A forum answered by staff</td>
+          </tr>
+          <tr>
+            <td><strong>AI Progress Summary</strong></td>
+            <td>Daily, Weekly & Monthly AI briefs (What went well, next steps)</td>
+            <td>1-click clinical PDF progress report for OPD table</td>
+            <td>24/7 AI chatbot for meal craving triage</td>
+          </tr>
+          <tr>
+            <td><strong>Telehealth & Billing</strong></td>
+            <td>— (Version 2/3 Scope)</td>
+            <td>Appointment reschedule calendar in app</td>
+            <td>Encrypted in-app 1-on-1 HD video & Razorpay</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Interactive Prototype Showcase Box -->
+    <div class="prototype-cta">
+      <div>
+        <h4>🎨 Interactive Figma Mobile Prototype Ready</h4>
+        <p>Preview all 5 core screens (Onboarding, Daily Log, Leaderboard, Knowledge Base, AI Summary) live in browser.</p>
+      </div>
+      <a href="Dr_Mistry_Weight_App_Figma_Prototype.html" target="_blank" class="btn-link">
+        Open Interactive Prototype ↗
+      </a>
+    </div>
+
+    <!-- Section 3: Payment Milestones -->
+    <div class="sec-heading">3. Project Milestone Payment Schedule (At ₹1,45,000)</div>
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Milestone Phase</th>
+            <th>Percentage</th>
+            <th>Amount (Combined ₹1.45L)</th>
+            <th>Deliverable & Verification Criteria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Milestone 1: Project Kickoff</strong></td>
+            <td>30%</td>
+            <td>₹43,500 INR</td>
+            <td>UI/UX screen flows & interactive Figma prototype signoff</td>
+          </tr>
+          <tr>
+            <td><strong>Milestone 2: Functional Alpha</strong></td>
+            <td>40%</td>
+            <td>₹58,000 INR</td>
+            <td>Working app with login, profile, BMI/BMR, food & workout logs</td>
+          </tr>
+          <tr>
+            <td><strong>Milestone 3: Beta & Portal</strong></td>
+            <td>20%</td>
+            <td>₹29,000 INR</td>
+            <td>Gamification medals, Leaderboard, AI summaries & Doctor Portal</td>
+          </tr>
+          <tr>
+            <td><strong>Milestone 4: Public Go-Live</strong></td>
+            <td>10%</td>
+            <td>₹14,500 INR</td>
+            <td>Official release on Apple App Store & Google Play Store</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section 4: Annual Maintenance Services (AMC) -->
+    <div class="sec-heading">4. Annual Maintenance Contract (AMC) — Included Services (₹25,000 / Year)</div>
+    <div class="table-box">
+      <table>
+        <thead>
+          <tr>
+            <th>Service Area</th>
+            <th>Included Scope & Annual Deliverables</th>
+            <th>Frequency / SLA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Store OS Compatibility Updates</strong></td>
+            <td>Annual updates to match new Apple iOS and Google Android SDK requirements, preventing app de-listing from App Store & Play Store.</td>
+            <td>Annual / As Released</td>
+          </tr>
+          <tr>
+            <td><strong>Cloud Server & Database Management</strong></td>
+            <td>Database performance tuning, daily automated encrypted backups, server health monitoring, and 99.9% uptime assurance.</td>
+            <td>Continuous / 24×7</td>
+          </tr>
+          <tr>
+            <td><strong>Security Patching & Hotfixes</strong></td>
+            <td>SSL/TLS certificate maintenance, library vulnerability patching, and rapid hotfixes for newly discovered device/OS bugs.</td>
+            <td>Monthly / Immediate</td>
+          </tr>
+          <tr>
+            <td><strong>AI Engine & API Maintenance</strong></td>
+            <td>Prompt fine-tuning, latency optimization, and token health monitoring for the Google Gemini AI summary generator.</td>
+            <td>Quarterly Review</td>
+          </tr>
+          <tr>
+            <td><strong>Doctor Portal & Content Assistance</strong></td>
+            <td>Technical assistance for hospital staff to upload, format, and publish new blogs, diet advice, and video links to the Knowledge Base.</td>
+            <td>On-Demand (Within 24 hrs)</td>
+          </tr>
+          <tr>
+            <td><strong>Priority Technical Support</strong></td>
+            <td>Direct priority WhatsApp & phone support for Dr. Jitendra Mistry and authorized clinic staff for any app technical inquiries.</td>
+            <td>Priority Desk (9 AM – 9 PM)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Acceptance / Signatures -->
+    <div class="sig-grid">
+      <div class="sig-col">
+        <div class="role-label">Accepted for Mission Gastrocare / Clinic:</div>
+        <div class="sig-line"></div>
+        <div class="name">Dr. Jitendra Mistry</div>
+        <div class="title">Director & Senior GI / Bariatric Surgeon</div>
+      </div>
+      <div class="sig-col">
+        <div class="role-label">Presented by Digital Engineering Team:</div>
+        <div class="sig-line"></div>
+        <div class="name">Harshal & Team</div>
+        <div class="title">Lead Digital Architect & Mobile App Specialists</div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

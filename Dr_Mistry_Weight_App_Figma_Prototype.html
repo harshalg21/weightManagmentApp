@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weight Management App — Interactive Figma UI Prototype</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+
+    :root {
+      --bg: #090d16;
+      --card: #131b2e;
+      --card-border: #1e293b;
+      --primary: #10b981;
+      --accent: #6366f1;
+      --gold: #f59e0b;
+      --danger: #ef4444;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #06080e;
+      color: var(--text);
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .top-toolbar {
+      max-width: 1550px;
+      margin: 0 auto 24px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #1e293b;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .toolbar-title h1 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-title p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .view-switcher {
+      display: flex;
+      background: #131b2e;
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid #1e293b;
+      gap: 4px;
+    }
+
+    .switch-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .switch-btn.active {
+      background: var(--primary);
+      color: #000;
+    }
+
+    .brochure-link {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #334155;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Multi-Artboard Canvas View */
+    .canvas-grid {
+      max-width: 1550px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 26px;
+      justify-items: center;
+    }
+
+    /* Single Interactive Device View */
+    .interactive-container {
+      display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .screen-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .screen-tag {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .screen-tag span { color: var(--primary); }
+
+    /* Phone Device Frame */
+    .phone {
+      width: 310px;
+      height: 640px;
+      background: var(--bg);
+      border-radius: 40px;
+      border: 5px solid #222b3d;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .island {
+      width: 86px;
+      height: 22px;
+      background: #000;
+      border-radius: 20px;
+      margin: 8px auto 4px auto;
+      z-index: 10;
+    }
+
+    .content {
+      flex: 1;
+      padding: 10px 15px 64px 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .content::-webkit-scrollbar { display: none; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 15px;
+      padding: 13px;
+    }
+
+    .input-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 11px;
+      background: #0b1120;
+      border-radius: 10px;
+      font-size: 11.5px;
+      margin-top: 5px;
+    }
+
+    .calc-box {
+      background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(99,102,241,0.15));
+      border: 1px solid rgba(16,185,129,0.3);
+      padding: 11px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .quick-copy-btn {
+      background: rgba(16,185,129,0.15);
+      border: 1px dashed var(--primary);
+      color: var(--primary);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .quick-copy-btn:hover { background: rgba(16,185,129,0.25); }
+
+    .log-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      background: #0c1222;
+      border-radius: 10px;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .streak-card {
+      background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(239,68,68,0.15));
+      border: 1px solid rgba(245,158,11,0.3);
+      padding: 12px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .medals-shelf {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .medal {
+      flex: 1;
+      background: #0c1222;
+      border: 1px solid #1e293b;
+      padding: 7px 3px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .medal.unlocked {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .whatsapp-btn {
+      background: #25d366;
+      color: #000;
+      border: none;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .leaderboard-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: #0c1222;
+      border-radius: 10px;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .rank-num { width: 18px; font-weight: 800; color: var(--gold); }
+
+    .article-card {
+      background: #0c1222;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #1e293b;
+    }
+
+    .article-thumb {
+      height: 64px;
+      background: linear-gradient(135deg, #1e293b, #334155);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .ai-pill {
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    /* Bottom Nav Bar */
+    .nav {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 56px;
+      background: rgba(11,16,28,0.96);
+      border-top: 1px solid #1e293b;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    .nav-item {
+      cursor: pointer;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-item.active { color: var(--primary); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <!-- Top Toolbar -->
+  <div class="top-toolbar">
+    <div class="toolbar-title">
+      <h1>⚡ Dr. Mistry Weight App — Interactive Figma UI</h1>
+      <p>Click tabs inside the phone or switch between All Screens and Interactive Mode</p>
+    </div>
+
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <div class="view-switcher">
+        <button class="switch-btn active" id="btn-canvas" onclick="setView('canvas')">Figma Artboards (All)</button>
+        <button class="switch-btn" id="btn-interactive" onclick="setView('interactive')">Interactive Phone Mode</button>
+      </div>
+      <a href="Weight_Management_App_Commercial_Brochure_Dr_Mistry.html" class="brochure-link">
+        📄 View Proposal Brochure
+      </a>
+    </div>
+  </div>
+
+  <!-- MULTI-ARTBOARD CANVAS VIEW (Default) -->
+  <div class="canvas-grid" id="canvas-view">
+
+    <!-- Screen 1: Profile -->
+    <div class="screen-wrapper">
+      <div class="screen-tag"><span>01</span> Profile & BMI/BMR</div>
+      <div class="phone">
+        <div class="island"></div>
+        <div class="content">
+          <div style="font-size: 14px; font-weight: 800;">Patient Profile Setup</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Unique ID: #MGC-84920</div>
+          <div class="card">
+            <div style="font-size: 11px; font-weight: 700;">Physical Parameters</div>
+            <div class="input-row"><span>Height</span><strong>174 cm (5'8.5")</strong></div>
+            <div class="input-row"><span>Weight</span><strong>82.4 kg (181 lbs)</strong></div>
+            <div class="input-row"><span>Activity</span><strong>Moderate (3-4x/wk)</strong></div>
+          </div>
+          <div class="calc-box">
+            <div style="font-size: 9.5px; color: var(--primary); font-weight: 800;">METABOLIC ENGINE</div>
+            <div style="font-size: 20px; font-weight: 800; margin: 3px 0;">BMI: 27.2 <small style="font-size: 10px; color:#f59e0b;">(Overweight)</small></div>
+            <div style="font-size: 10.5px; color: var(--text-muted);">BMR: 1,740 kcal/day</div>
+          </div>
+          <div class="card" style="padding: 10px 12px;">
+            <div style="font-size: 11px; font-weight: 700; margin-bottom: 5px;">Calorie Recommendations</div>
+            <div style="display:flex; justify-content:space-between; font-size:10.5px; margin-top:3px;">
+              <span style="color:#10b981;">• Weight Loss:</span><strong>1,550 kcal</strong>
+            </div>
+            <div style="display:flex; justify-content:space-between; font-size:10.5px; margin-top:3px;">
+              <span style="color:#38bdf8;">• Maintenance:</span><strong>2,050 kcal</strong>
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <div class="nav-item active">Profile</div><div class="nav-item">Logs</div><div class="nav-item">Ranks</div><div class="nav-item">Learn</div><div class="nav-item">AI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 2: Logs -->
+    <div class="screen-wrapper">
+      <div class="screen-tag"><span>02</span> Daily Logs & Quick-Copy</div>
+      <div class="phone">
+        <div class="island"></div>
+        <div class="content">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-size: 14px; font-weight: 800;">Daily Energy Balance</div>
+            <span style="font-size: 10px; color: var(--primary); font-weight: 700;">-500 kcal Deficit</span>
+          </div>
+          <div class="card" style="text-align:center; padding: 12px;">
+            <div style="font-size: 10px; color: var(--text-muted); font-weight:700;">NET CALORIES</div>
+            <div style="font-size: 22px; font-weight: 800; font-family:'JetBrains Mono';">1,480 / 1,550</div>
+            <div style="font-size: 10px; color:#10b981; margin-top:2px;">In: 1,820 kcal | Burned: 340 kcal</div>
+          </div>
+          <button class="quick-copy-btn" onclick="alert('Quick-Copied: 2 Rotis + Dal (+450 kcal)!')">
+            ⚡ Quick-Copy Yesterday's Lunch (+450 kcal)
+          </button>
+          <div class="card" style="padding: 10px 12px;">
+            <div style="font-size: 11px; font-weight: 700;">Meal Logs</div>
+            <div class="log-item"><span>🍳 2 Boiled Eggs + Oats</span><strong>310 kcal</strong></div>
+            <div class="log-item"><span>🍛 2 Rotis + Dal Bowl</span><strong>420 kcal</strong></div>
+          </div>
+          <div class="card" style="padding: 10px 12px;">
+            <div style="font-size: 11px; font-weight: 700;">Workout Logs</div>
+            <div class="log-item"><span>🏃 45m Evening Walk</span><strong style="color:#10b981;">-210 kcal</strong></div>
+          </div>
+        </div>
+        <div class="nav">
+          <div class="nav-item">Profile</div><div class="nav-item active">Logs</div><div class="nav-item">Ranks</div><div class="nav-item">Learn</div><div class="nav-item">AI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 3: Leaderboard -->
+    <div class="screen-wrapper">
+      <div class="screen-tag"><span>03</span> Streaks & Leaderboard</div>
+      <div class="phone">
+        <div class="island"></div>
+        <div class="content">
+          <div class="streak-card">
+            <div style="font-size: 10px; font-weight: 800; color: #f59e0b;">CONSISTENCY ENGINE</div>
+            <div style="font-size: 24px; font-weight: 800; margin: 2px 0;">🔥 24 Day Streak</div>
+            <div style="font-size: 10px;">6 days left to unlock Silver Medal!</div>
+          </div>
+          <div class="card" style="padding: 10px 12px;">
+            <div style="font-size: 11px; font-weight: 700;">Streak Medals</div>
+            <div class="medals-shelf">
+              <div class="medal unlocked">🪵<br>Wood<br><small>Day 7</small></div>
+              <div class="medal unlocked">🥉<br>Bronze<br><small>Day 30</small></div>
+              <div class="medal">🥈<br>Silver<br><small>3 Mo</small></div>
+              <div class="medal">🥇<br>Gold<br><small>9 Mo</small></div>
+            </div>
+          </div>
+          <button class="whatsapp-btn" onclick="alert('WhatsApp Card generated for status!')">
+            <span>💬 Share Streak to WhatsApp Status</span>
+          </button>
+          <div class="card" style="padding: 10px 12px;">
+            <div style="font-size: 11px; font-weight: 700; margin-bottom: 4px;">Weekly Leaderboard</div>
+            <div class="leaderboard-row"><span class="rank-num">1</span><span>👑 Rohit K.</span><strong>28 Days</strong></div>
+            <div class="leaderboard-row" style="border: 1px solid var(--primary);"><span class="rank-num">2</span><span>⭐ You (Arjun)</span><strong style="color:var(--primary);">24 Days</strong></div>
+            <div class="leaderboard-row"><span class="rank-num">3</span><span>🥉 Neha P.</span><strong>22 Days</strong></div>
+          </div>
+        </div>
+        <div class="nav">
+          <div class="nav-item">Profile</div><div class="nav-item">Logs</div><div class="nav-item active">Ranks</div><div class="nav-item">Learn</div><div class="nav-item">AI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 4: Knowledge Base -->
+    <div class="screen-wrapper">
+      <div class="screen-tag"><span>04</span> Knowledge Base</div>
+      <div class="phone">
+        <div class="island"></div>
+        <div class="content">
+          <div style="font-size: 14px; font-weight: 800;">Dr. Mistry's Health Desk</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Curated Clinical Articles & Videos</div>
+          <div class="article-card">
+            <div class="article-thumb">🎥</div>
+            <div style="padding: 9px;">
+              <div style="font-size: 11px; font-weight: 800;">Fatty Liver & Sugar: Dr. Mistry Explains</div>
+              <div style="font-size: 9px; color: var(--text-muted); margin-top:2px;">Video Guide • 6 mins</div>
+            </div>
+          </div>
+          <div class="article-card">
+            <div class="article-thumb">🥗</div>
+            <div style="padding: 9px;">
+              <div style="font-size: 11px; font-weight: 800;">High-Protein Gujarati Meal Swaps</div>
+              <div style="font-size: 9px; color: var(--text-muted); margin-top:2px;">Dietitian Article • 4 mins read</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <div class="nav-item">Profile</div><div class="nav-item">Logs</div><div class="nav-item">Ranks</div><div class="nav-item active">Learn</div><div class="nav-item">AI</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Screen 5: AI Summary -->
+    <div class="screen-wrapper">
+      <div class="screen-tag"><span>05</span> AI Clinical Summary</div>
+      <div class="phone">
+        <div class="island"></div>
+        <div class="content">
+          <div style="font-size: 14px; font-weight: 800;">AI Performance Summary</div>
+          <div style="font-size: 10px; color: var(--text-muted);">Generated by Gemini Clinical Engine</div>
+          <div class="ai-pill">
+            <strong style="color: #34d399;">✅ What Went Well:</strong><br>
+            Hit 500 kcal deficit on 5 of 7 days this week. Evening walk adherence at 88%.
+          </div>
+          <div class="ai-pill" style="border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.1);">
+            <strong style="color: #f59e0b;">⚠️ What Slipped:</strong><br>
+            Late dinner on Friday added 320 excess carb calories.
+          </div>
+          <div class="ai-pill" style="border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.1);">
+            <strong style="color: #38bdf8;">🎯 What To Do Next:</strong><br>
+            Add 15g protein to lunch (roasted chana or paneer) to avoid night cravings.
+          </div>
+        </div>
+        <div class="nav">
+          <div class="nav-item">Profile</div><div class="nav-item">Logs</div><div class="nav-item">Ranks</div><div class="nav-item">Learn</div><div class="nav-item active">AI</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SINGLE INTERACTIVE DEVICE MODE (Clickable) -->
+  <div class="interactive-container" id="interactive-view">
+    <div class="screen-wrapper">
+      <div class="screen-tag" id="active-screen-title">Active: <span>Home Logs</span> (Click bottom tabs to switch)</div>
+      <div class="phone" style="width: 350px; height: 700px;">
+        <div class="island"></div>
+        
+        <!-- Dynamic Screen Content Body -->
+        <div class="content" id="interactive-body">
+          <!-- Content populated dynamically via JS -->
+        </div>
+
+        <!-- Interactive Bottom Navigation -->
+        <div class="nav" style="height: 60px;">
+          <div class="nav-item" id="tab-profile" onclick="switchInteractiveTab('profile')">
+            <span>👤</span><span>Profile</span>
+          </div>
+          <div class="nav-item active" id="tab-logs" onclick="switchInteractiveTab('logs')">
+            <span>📝</span><span>Logs</span>
+          </div>
+          <div class="nav-item" id="tab-ranks" onclick="switchInteractiveTab('ranks')">
+            <span>🏆</span><span>Ranks</span>
+          </div>
+          <div class="nav-item" id="tab-learn" onclick="switchInteractiveTab('learn')">
+            <span>📚</span><span>Learn</span>
+          </div>
+          <div class="nav-item" id="tab-ai" onclick="switchInteractiveTab('ai')">
+            <span>✨</span><span>AI</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const screens = {
+      profile: `
+        <div style="font-size: 15px; font-weight: 800;">Patient Profile Setup</div>
+        <div style="font-size: 11px; color: var(--text-muted);">ID: #MGC-84920 (Linked to Dr. Mistry)</div>
+        <div class="card">
+          <div style="font-size: 12px; font-weight: 700;">Physical Parameters</div>
+          <div class="input-row"><span>Height</span><strong>174 cm (5'8.5")</strong></div>
+          <div class="input-row"><span>Weight</span><strong>82.4 kg (181 lbs)</strong></div>
+          <div class="input-row"><span>Activity</span><strong>Moderate (3-4x/wk)</strong></div>
+        </div>
+        <div class="calc-box">
+          <div style="font-size: 10px; color: var(--primary); font-weight: 800;">METABOLIC ENGINE</div>
+          <div style="font-size: 22px; font-weight: 800; margin: 4px 0;">BMI: 27.2 <small style="font-size: 11px; color:#f59e0b;">(Overweight)</small></div>
+          <div style="font-size: 11px; color: var(--text-muted);">BMR: 1,740 kcal/day</div>
+        </div>
+        <div class="card">
+          <div style="font-size: 12px; font-weight: 700; margin-bottom: 6px;">Calorie Recommendations</div>
+          <div style="display:flex; justify-content:space-between; font-size:11px; margin-top:4px;">
+            <span style="color:#10b981;">• Fat Loss (Deficit):</span><strong>1,550 kcal</strong>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:11px; margin-top:4px;">
+            <span style="color:#38bdf8;">• Maintenance:</span><strong>2,050 kcal</strong>
+          </div>
+        </div>
+      `,
+      logs: `
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="font-size: 15px; font-weight: 800;">Today's Energy Balance</div>
+          <span style="font-size: 11px; color: var(--primary); font-weight: 700;">-500 kcal Deficit</span>
+        </div>
+        <div class="card" style="text-align:center; padding: 14px;">
+          <div style="font-size: 11px; color: var(--text-muted); font-weight:700;">NET CALORIES</div>
+          <div style="font-size: 26px; font-weight: 800; font-family:'JetBrains Mono';">1,480 / 1,550</div>
+          <div style="font-size: 11px; color:#10b981; margin-top:2px;">In: 1,820 kcal | Burned: 340 kcal</div>
+        </div>
+        <button class="quick-copy-btn" onclick="alert('Copied 2 Rotis + Dal Bowl into Today Lunch (+450 kcal)!')">
+          ⚡ Quick-Copy Yesterday's Lunch (+450 kcal)
+        </button>
+        <div class="card">
+          <div style="font-size: 12px; font-weight: 700;">Meal Logs</div>
+          <div class="log-item"><span>🍳 2 Boiled Eggs + Oats</span><strong>310 kcal</strong></div>
+          <div class="log-item"><span>🍛 2 Rotis + Dal Bowl</span><strong>420 kcal</strong></div>
+          <div class="log-item"><span>🍎 Evening Apple + Almonds</span><strong>160 kcal</strong></div>
+        </div>
+        <div class="card">
+          <div style="font-size: 12px; font-weight: 700;">Workout Logs</div>
+          <div class="log-item"><span>🏃 45m Brisk Evening Walk</span><strong style="color:#10b981;">-210 kcal</strong></div>
+          <div class="log-item"><span>🏋️ 30m Core Dumbbells</span><strong style="color:#10b981;">-130 kcal</strong></div>
+        </div>
+      `,
+      ranks: `
+        <div class="streak-card">
+          <div style="font-size: 10px; font-weight: 800; color: #f59e0b;">CONSISTENCY ENGINE</div>
+          <div style="font-size: 26px; font-weight: 800; margin: 3px 0;">🔥 24 Day Streak</div>
+          <div style="font-size: 11px;">6 days left to unlock Silver Medal!</div>
+        </div>
+        <div class="card">
+          <div style="font-size: 12px; font-weight: 700;">Streak Medals</div>
+          <div class="medals-shelf">
+            <div class="medal unlocked">🪵<br>Wood<br><small>Day 7</small></div>
+            <div class="medal unlocked">🥉<br>Bronze<br><small>Day 30</small></div>
+            <div class="medal">🥈<br>Silver<br><small>3 Mo</small></div>
+            <div class="medal">🥇<br>Gold<br><small>9 Mo</small></div>
+          </div>
+        </div>
+        <button class="whatsapp-btn" onclick="alert('Generated WhatsApp Card: 24-Day Streak badge ready to share!')">
+          <span>💬 Share Streak to WhatsApp Status</span>
+        </button>
+        <div class="card">
+          <div style="font-size: 12px; font-weight: 700; margin-bottom: 4px;">Weekly Leaderboard</div>
+          <div class="leaderboard-row"><span class="rank-num">1</span><span>👑 Rohit K.</span><strong>28 Days</strong></div>
+          <div class="leaderboard-row" style="border: 1px solid var(--primary);"><span class="rank-num">2</span><span>⭐ You (Arjun)</span><strong style="color:var(--primary);">24 Days</strong></div>
+          <div class="leaderboard-row"><span class="rank-num">3</span><span>🥉 Neha P.</span><strong>22 Days</strong></div>
+        </div>
+      `,
+      learn: `
+        <div style="font-size: 15px; font-weight: 800;">Dr. Mistry's Health Desk</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Curated Clinical Articles & Videos</div>
+        <div class="article-card">
+          <div class="article-thumb">🎥</div>
+          <div style="padding: 10px;">
+            <div style="font-size: 12px; font-weight: 800;">Fatty Liver & Sugar: Dr. Mistry Explains</div>
+            <div style="font-size: 10px; color: var(--text-muted); margin-top:2px;">Video Guide • 6 mins</div>
+          </div>
+        </div>
+        <div class="article-card">
+          <div class="article-thumb">🥗</div>
+          <div style="padding: 10px;">
+            <div style="font-size: 12px; font-weight: 800;">High-Protein Gujarati Meal Swaps</div>
+            <div style="font-size: 10px; color: var(--text-muted); margin-top:2px;">Dietitian Article • 4 mins read</div>
+          </div>
+        </div>
+        <div class="article-card">
+          <div class="article-thumb">💧</div>
+          <div style="padding: 10px;">
+            <div style="font-size: 12px; font-weight: 800;">Hydration & Metabolism Speed</div>
+            <div style="font-size: 10px; color: var(--text-muted); margin-top:2px;">AI Health Brief • 2 mins read</div>
+          </div>
+        </div>
+      `,
+      ai: `
+        <div style="font-size: 15px; font-weight: 800;">AI Performance Summary</div>
+        <div style="font-size: 11px; color: var(--text-muted);">Generated by Gemini Clinical Engine</div>
+        <div class="ai-pill">
+          <strong style="color: #34d399;">✅ What Went Well:</strong><br>
+          Hit 500 kcal deficit on 5 of 7 days this week. Evening walk adherence at 88%.
+        </div>
+        <div class="ai-pill" style="border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.1);">
+          <strong style="color: #f59e0b;">⚠️ What Slipped:</strong><br>
+          Late dinner on Friday added 320 excess carb calories.
+        </div>
+        <div class="ai-pill" style="border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.1);">
+          <strong style="color: #38bdf8;">🎯 What To Do Next:</strong><br>
+          Add 15g protein to lunch (roasted chana or paneer) to avoid night cravings.
+        </div>
+        <button style="background: #1e293b; color:#fff; border: 1px solid #334155; padding: 10px; border-radius: 10px; font-size: 11.5px; font-weight: 700; width: 100%;">
+          📄 Export Summary for Dr. Mistry
+        </button>
+      `
+    };
+
+    function setView(mode) {
+      document.getElementById('btn-canvas').classList.toggle('active', mode === 'canvas');
+      document.getElementById('btn-interactive').classList.toggle('active', mode === 'interactive');
+      document.getElementById('canvas-view').style.display = mode === 'canvas' ? 'grid' : 'none';
+      document.getElementById('interactive-view').style.display = mode === 'interactive' ? 'flex' : 'none';
+      if (mode === 'interactive') {
+        switchInteractiveTab('logs');
+      }
+    }
+
+    function switchInteractiveTab(tabKey) {
+      document.querySelectorAll('#interactive-view .nav-item').forEach(el => el.classList.remove('active'));
+      const activeEl = document.getElementById('tab-' + tabKey);
+      if (activeEl) activeEl.classList.add('active');
+      document.getElementById('interactive-body').innerHTML = screens[tabKey];
+      document.getElementById('active-screen-title').innerHTML = `Active Screen: <span>${tabKey.toUpperCase()}</span>`;
+    }
+
+    // Initialize interactive body
+    switchInteractiveTab('logs');
+  </script>
+
+</body>
+</html>
